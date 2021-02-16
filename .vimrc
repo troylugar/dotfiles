@@ -9,6 +9,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 call plug#end()
 
 colorscheme gruvbox
+let g:airline_theme='base16_gruvbox_dark_hard'
 
 "" NERDTree keyboard shortcuts
 nnoremap <C-t> :NERDTreeToggle<CR>
