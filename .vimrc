@@ -8,6 +8,7 @@ Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 call plug#end()
 
+"" Theme
 colorscheme gruvbox
 let g:airline_theme='base16_gruvbox_dark_hard'
 
@@ -21,6 +22,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+set splitbelow
+set splitright
+
+"" Easier escape
 imap jj <Esc>
 imap ff <Esc>
 
@@ -48,7 +53,6 @@ set ruler " Show row and column ruler information
 
 set undolevels=1000 " Number of undo levels
 set backspace=indent,eol,start " Backspace behaviour
-
-set cursorline
-
 "" VimConfig.com end
+
+set cursorline " Hightlight current line
