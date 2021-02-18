@@ -13,6 +13,9 @@ call plug#end()
 colorscheme gruvbox
 let g:airline_theme='base16_gruvbox_dark_hard'
 
+"" Ctrl-P ignore list
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 "" Easier saving
 nnoremap <C-S> :w<CR>
 
@@ -36,12 +39,18 @@ nnoremap Ó :vertical resize -1<CR> " Ó = <Shift-Option-H> for mac
 nnoremap Ô :resize -1<CR>          " Ô = <Shift-Option-J> for mac
 nnoremap  :resize +1<CR>          "  = <Shift-Option-K> for mac
 nnoremap Ò :vertical resize +1<CR> " Ò = <Shift-Option-L> for mac
-nnoremap <S-M-H> :vertical resize -1<CR>
-nnoremap <S-M-J> :resize -1<CR>
+"" Meta key too
+nnoremap <M-S-H> :vertical resize -1<CR>
+nnoremap <M-S-J> :resize -1<CR>
+nnoremap <M-S-K> :resize +1<CR>
+nnoremap <M-S-L> :vertical resize +1<CR>
 
-""Easier splits
+"" Easier splits
 nnoremap “ :spl<CR>                " “ = <Option-[> for mac
 nnoremap ‘ :vspl<CR>               " ‘ = <Option-]> for mac
+"" Meta key too
+nnoremap <M-[> :spl<CR>
+nnoremap <M-]> :vspl<CR>
 
 "" Regular settings
 set splitbelow
@@ -77,3 +86,4 @@ set undolevels=1000 " Number of undo levels
 set backspace=indent,eol,start " Backspace behaviour
 set scrolloff=5 " Scrolls at the offset, not at the end of the file
 set colorcolumn=80
+
