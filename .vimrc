@@ -1,48 +1,57 @@
-" plugins{{{
+" plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
+Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
+Plug 'fladson/vim-kitty'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " requires `fzf` install
 Plug 'junegunn/vim-easy-align'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'Mofiqul/vscode.nvim'
+" Plug 'morhetz/gruvbox'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " requires nvim 0.9+ gcc, g++
+Plug 'prettier/vim-prettier'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
+Plug 'universal-ctags/ctags' " requires ctags
 Plug 'yggdroot/indentline'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'prettier/vim-prettier'
-Plug 'universal-ctags/ctags'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'ervandew/supertab'
 call plug#end()
-"}}}
+" }}}
 
-" theme{{{
-colorscheme gruvbox
+" theme {{{
+set background=dark
+" colorscheme gruvbox
+colorscheme vscode
+" }}}
+
+" airline {{{
 let g:airline_theme='base16_gruvbox_dark_hard'
-"}}}
+let g:airline_powerline_fonts = 1
+" }}}
 
-" ctrlp{{{
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-"}}}
-
-" indentline{{{
+" indentline {{{
 "" Set indent line color (indentline)
 let g:indentLine_setColors = 0
 "" Set indent line character (indentline)
 let g:indentLine_char = '▏'
 " }}}
 
-" NERDTree{{{
+" NERDTree {{{
 let g:NERDTreeWinSize = 60
-"}}}
+" }}}
 
-" keymapping{{{
+" keymapping {{{
 "" Easier saving
 nnoremap <C-S> :w<CR>
+
+"" FZF keyboard shortcuts
+nnoremap <C-P> :FZF<CR>
 
 "" NERDTree keyboard shortcuts
 nnoremap <C-T> :NERDTreeToggle<CR>
@@ -76,9 +85,9 @@ nnoremap ‘ :vspl<CR>               " ‘ = <Option-]> for mac
 "" Meta key too
 nnoremap <M-[> :spl<CR>
 nnoremap <M-]> :vspl<CR>
-"}}}
+" }}}
 
-" settings{{{
+" settings {{{
 "" Splits
 set splitbelow
 set splitright
@@ -119,7 +128,28 @@ set scrolloff=5 " Scrolls at the offset, not at the end of the file
 set colorcolumn=120
 "}}}
 
-" autocmds{{{
+" autocmds {{{
 autocmd BufWinLeave *.txt mkview
 autocmd BufWinEnter *.txt silent loadview
+autocmd VimEnter * GitGutterEnable
+autocmd VimEnter * highlight link GitGutterChangeLine DiffText
+autocmd VimEnter * GitGutterLineNrHighlightsEnable
+" autocmd VimEnter * GitGutterLineHighlightsEnable
+autocmd BufWritePost * GitGutterEnable
 "}}}
+
+" lua scripts {{{
+" treesitter config {{{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  sync_install = false,
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+" }}}
+" }}}
