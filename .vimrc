@@ -20,7 +20,10 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'universal-ctags/ctags' " requires ctags
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'vim-test/vim-test'
 Plug 'yggdroot/indentline'
+Plug 'xuyuanp/nerdtree-git-plugin'
 call plug#end()
 " }}}
 
@@ -31,8 +34,13 @@ colorscheme vscode
 " }}}
 
 " airline {{{
-let g:airline_theme='base16_gruvbox_dark_hard'
+let g:airline_theme='base16_classic_dark'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+" stright tabs (default uses powerline)
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 " }}}
 
 " indentline {{{
@@ -44,6 +52,20 @@ let g:indentLine_char = '▏'
 
 " NERDTree {{{
 let g:NERDTreeWinSize = 60
+" }}}
+
+" ctrlspace {{{
+let g:airline#extensions#ctrlspace#enabled = 1
+let g:CtrlSpaceDefaultMappingKey = "<C-space> "
+let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
+" }}}
+
+" fzf {{{
+let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -o -print'
+" }}}
+
+" vimtest {{{
+let test#strategy = "neovim"
 " }}}
 
 " keymapping {{{
@@ -129,8 +151,8 @@ set colorcolumn=120
 "}}}
 
 " autocmds {{{
-autocmd BufWinLeave *.txt mkview
-autocmd BufWinEnter *.txt silent loadview
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* silent loadview
 autocmd VimEnter * GitGutterEnable
 autocmd VimEnter * highlight link GitGutterChangeLine DiffText
 autocmd VimEnter * GitGutterLineNrHighlightsEnable
@@ -153,3 +175,6 @@ require'nvim-treesitter.configs'.setup {
 EOF
 " }}}
 " }}}
+
+" fzf install said I needed this?
+"   set rtp+=/opt/homebrew/opt/fzf
